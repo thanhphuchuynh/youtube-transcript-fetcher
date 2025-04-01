@@ -1,5 +1,5 @@
 ---
-title: Unlocking YouTube's Hidden Transcript API - A Deep Dive into Video Transcription
+title: YouTube's transcript feature with proxy
 published: true
 description: Learn how to programmatically access YouTube video transcripts, handle multiple languages, and implement proxy support using TypeScript.
 tags: typescript, youtube, api, webdev
@@ -126,6 +126,6 @@ When working with YouTube's transcript API:
 
 YouTube's hidden transcript API offers powerful capabilities for developers. While not officially documented, it provides reliable access to video transcripts when handled properly. The TypeScript implementation shown here demonstrates how to access this functionality while handling edge cases and providing proxy support for more robust applications.
 
-The complete implementation is available as an npm package: [t-youtube-transcript-fetcher](https://www.npmjs.com/package/t-youtube-transcript-fetcher).
+The complete implementation is available as an npm package: [t-youtube-transcript-fetcher](https://www.npmjs.com/package/t-youtube-transcript-fetcher). Check out the source code on [GitHub](https://github.com/thanhphuchuynh/youtube-transcript-fetcher) for more details and implementation examples.
 
 Remember to respect YouTube's terms of service and implement proper rate limiting in your applications. Happy coding! 🚀
