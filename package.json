@@ -2,9 +2,14 @@
   "name": "youtube-transcript-fetcher",
   "version": "1.0.0",
   "description": "A TypeScript library for fetching transcripts from YouTube videos",
+  "type": "module",
   "scripts": {
     "build": "tsc",
-    "example": "ts-node examples/fetch-transcript.ts"
+    "example": "npm run build && node dist/examples/fetch-transcript.js"
+  },
+  "dependencies": {
+    "https-proxy-agent": "^7.0.0",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "typescript": "^5.0.0",

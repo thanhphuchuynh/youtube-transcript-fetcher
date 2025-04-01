@@ -1,5 +1,8 @@
-export * from './constants';
-export * from './errors';
-export * from './types';
-export * from './transcript';
-export * from './utils/format';
+export * from './transcript.js';
+export * from './types.js';
+export * from './errors.js';
+export * from './constants.js';
+export * from './utils/format.js';
+
+// Re-export YoutubeTranscript explicitly
+export { YoutubeTranscript } from './transcript.js';

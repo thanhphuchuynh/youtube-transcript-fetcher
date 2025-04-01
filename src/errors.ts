@@ -1,4 +1,4 @@
-import { formatErrorMessage } from './utils/format';
+import { formatErrorMessage } from './utils/format.js';
 
 /**
  * Base error class for YouTube transcript errors

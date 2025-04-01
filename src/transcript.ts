@@ -1,4 +1,4 @@
-import { CONSTANTS } from './constants';
+import { CONSTANTS } from './constants.js';
 import {
   TranscriptError,
   RateLimitError,
@@ -6,8 +6,11 @@ import {
   TranscriptDisabledError,
   NoTranscriptError,
   LanguageNotFoundError,
-} from './errors';
-import { TranscriptConfig, TranscriptSegment, CaptionsData } from './types';
+} from './errors.js';
+import { TranscriptConfig, TranscriptSegment, CaptionsData } from './types.js';
+import fetch, { RequestInit } from 'node-fetch';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+import { URL } from 'url';
 
 /**
  * Service class for fetching YouTube video transcripts
@@ -24,22 +27,50 @@ export class YoutubeTranscript {
     config?: TranscriptConfig
   ): Promise<TranscriptSegment[]> {
     const identifier = this.retrieveVideoId(videoId);
-    const pageContent = await this.fetchVideoPage(identifier, config?.lang);
+    const pageContent = await this.fetchVideoPage(identifier, config);
     const captionsData = this.parseCaptionsData(pageContent, videoId);
     const transcriptUrl = this.getTranscriptUrl(captionsData, videoId, config?.lang);
-    return this.fetchAndParseTranscript(transcriptUrl, config?.lang, captionsData.playerCaptionsTracklistRenderer.captionTracks[0].languageCode);
+    return this.fetchAndParseTranscript(transcriptUrl, config?.lang, captionsData.playerCaptionsTracklistRenderer.captionTracks[0].languageCode, config);
+  }
+
+  /**
+   * Creates fetch options with proxy configuration if provided
+   */
+  private static getFetchOptions(config?: TranscriptConfig, extraHeaders: Record<string, string> = {}): RequestInit {
+    const headers = {
+      'User-Agent': CONSTANTS.USER_AGENT,
+      ...extraHeaders,
+    };
+
+    const options: RequestInit & { agent?: any } = { headers };
+
+    if (config?.proxyAgent) {
+      // Use pre-configured proxy agent if provided
+      options.agent = config.proxyAgent;
+    } else if (config?.proxy) {
+      // Otherwise, create a proxy agent from the proxy configuration
+      const proxyUrl = new URL(config.proxy.host);
+      if (config.proxy.auth) {
+        proxyUrl.username = config.proxy.auth.username;
+        proxyUrl.password = config.proxy.auth.password;
+      }
+      options.agent = new HttpsProxyAgent(proxyUrl.toString());
+    }
+
+    return options;
   }
 
   /**
    * Fetches the video page content
    */
-  private static async fetchVideoPage(videoId: string, lang?: string): Promise<string> {
-    const response = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
-      headers: {
-        ...(lang && { 'Accept-Language': lang }),
-        'User-Agent': CONSTANTS.USER_AGENT,
-      },
-    });
+  private static async fetchVideoPage(videoId: string, config?: TranscriptConfig): Promise<string> {
+    const extraHeaders: Record<string, string> = {};
+    if (config?.lang) {
+      extraHeaders['Accept-Language'] = config.lang;
+    }
+    const options = this.getFetchOptions(config, extraHeaders);
+    
+    const response = await fetch(`https://www.youtube.com/watch?v=${videoId}`, options);
     return response.text();
   }
 
@@ -134,14 +165,16 @@ export class YoutubeTranscript {
   private static async fetchAndParseTranscript(
     transcriptUrl: string,
     requestedLang?: string,
-    defaultLang?: string
+    defaultLang?: string,
+    config?: TranscriptConfig
   ): Promise<TranscriptSegment[]> {
-    const response = await fetch(transcriptUrl, {
-      headers: {
-        ...(requestedLang && { 'Accept-Language': requestedLang }),
-        'User-Agent': CONSTANTS.USER_AGENT,
-      },
-    });
+    const extraHeaders: Record<string, string> = {};
+    if (requestedLang) {
+      extraHeaders['Accept-Language'] = requestedLang;
+    }
+    const options = this.getFetchOptions(config, extraHeaders);
+    
+    const response = await fetch(transcriptUrl, options);
 
     if (!response.ok) {
       throw new NoTranscriptError(transcriptUrl);

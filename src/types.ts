@@ -2,6 +2,18 @@
 export interface TranscriptConfig {
   /** ISO language code (e.g., 'en', 'es', 'fr') */
   lang?: string;
+  /** Proxy configuration for fetch requests */
+  proxy?: {
+    /** Proxy server URL (e.g., 'http://proxy.example.com:8080') */
+    host: string;
+    /** Optional proxy authentication */
+    auth?: {
+      username: string;
+      password: string;
+    };
+  };
+  /** Pre-configured proxy agent (takes precedence over proxy config) */
+  proxyAgent?: any;
 }
 
 /** Structure of a transcript segment */
