@@ -1,12 +1,37 @@
 {
   "name": "youtube-transcript-fetcher",
   "version": "1.0.0",
-  "description": "A TypeScript library for fetching transcripts from YouTube videos",
+  "description": "A TypeScript library for fetching transcripts from YouTube videos with proxy support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "example": "npm run build && node dist/examples/fetch-transcript.js"
   },
+  "keywords": [
+    "youtube",
+    "transcript",
+    "captions",
+    "subtitles",
+    "proxy",
+    "typescript"
+  ],
+  "author": "Phuc Huynh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanhphuchuynh/youtube-transcript-fetcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thanhphuchuynh/youtube-transcript-fetcher/issues"
+  },
+  "homepage": "https://github.com/thanhphuchuynh/youtube-transcript-fetcher#readme",
   "dependencies": {
     "https-proxy-agent": "^7.0.0",
     "node-fetch": "^3.3.2"
@@ -15,5 +40,8 @@
     "typescript": "^5.0.0",
     "ts-node": "^10.9.0",
     "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
