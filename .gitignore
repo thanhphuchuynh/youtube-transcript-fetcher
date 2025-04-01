@@ -45,3 +45,5 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+go-youtube-transcript-fetcher

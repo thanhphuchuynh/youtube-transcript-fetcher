@@ -1,4 +1,4 @@
-import { YoutubeTranscript } from '../src/index.js';
+import { YoutubeTranscript } from '../dist/index.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 async function main() {

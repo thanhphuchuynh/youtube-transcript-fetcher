@@ -9,11 +9,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist",
-    "declaration": true,
-    "rootDir": "src",
-    "declarationDir": "dist"
+    "outDir": "dist-examples",
+    "declaration": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["examples/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

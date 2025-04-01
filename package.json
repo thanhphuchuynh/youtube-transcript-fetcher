@@ -1,6 +1,6 @@
 {
   "name": "t-youtube-transcript-fetcher",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "An enhanced TypeScript library for fetching YouTube transcripts with proxy support (based on youtube-transcript)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,8 +11,9 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build:examples": "tsc -p tsconfig.examples.json",
     "prepublishOnly": "npm run build",
-    "example": "npm run build && node dist/examples/fetch-transcript.js",
+    "example": "npm run build && npm run build:examples && node dist-examples/examples/fetch-transcript.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
