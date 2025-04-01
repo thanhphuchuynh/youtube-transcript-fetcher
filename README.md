@@ -6,6 +6,7 @@ A TypeScript library for fetching transcripts from YouTube videos.
 
 - Fetch transcripts from YouTube videos using URL or video ID
 - Support for multiple languages
+- Proxy support with flexible configuration options
 - Comprehensive error handling
 - TypeScript support with full type definitions
 - Promise-based API
@@ -31,6 +32,7 @@ This will run the example in examples/fetch-transcript.ts which demonstrates:
 1. Fetching a transcript in the default language
 2. Fetching a transcript in Spanish
 3. Error handling with an invalid video ID
+4. Using proxy configuration
 
 For your own use case, you would need to copy the src/ directory into your project
 and install the required dependencies.
@@ -39,8 +41,9 @@ and install the required dependencies.
 
 ```typescript
 import { YoutubeTranscript } from './src';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
-// Fetch transcript with default language
+// Basic usage: Fetch transcript with default language
 const transcript = await YoutubeTranscript.fetchTranscript(
   'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 );
@@ -50,6 +53,23 @@ const spanishTranscript = await YoutubeTranscript.fetchTranscript(
   'dQw4w9WgXcQ', // Can use video ID directly
   { lang: 'es' }
 );
+
+// Using pre-configured proxy agent
+const proxyAgent = new HttpsProxyAgent('https://username:password@proxy.example.com:8080');
+const transcriptWithProxy = await YoutubeTranscript.fetchTranscript('VIDEO_ID', {
+  proxyAgent: proxyAgent
+});
+
+// Alternative: Using proxy configuration object
+const transcriptWithProxyConfig = await YoutubeTranscript.fetchTranscript('VIDEO_ID', {
+  proxy: {
+    host: 'http://proxy.example.com:8080',
+    auth: {
+      username: 'your-username',
+      password: 'your-password'
+    }
+  }
+});
 ```
 
 ## Example
@@ -57,6 +77,7 @@ const spanishTranscript = await YoutubeTranscript.fetchTranscript(
 Check out [examples/fetch-transcript.ts](examples/fetch-transcript.ts) for a complete example showing:
 - Fetching transcripts with default language
 - Fetching transcripts in specific languages
+- Using proxy configuration
 - Error handling
 
 ## API
@@ -70,6 +91,12 @@ Fetches the transcript for a YouTube video.
 - `videoId`: Video URL or ID
 - `config` (optional): Configuration options
   - `lang`: ISO language code (e.g., 'en', 'es', 'fr')
+  - `proxyAgent`: Pre-configured HttpsProxyAgent instance (takes precedence over proxy config)
+  - `proxy`: Proxy configuration object
+    - `host`: Proxy server URL (e.g., 'http://proxy.example.com:8080')
+    - `auth`: Optional proxy authentication
+      - `username`: Proxy username
+      - `password`: Proxy password
 
 #### Returns
 
@@ -126,3 +153,33 @@ try {
     // Handle other errors
   }
 }
+```
+
+## Proxy Support
+
+The library provides two ways to configure proxy support:
+
+1. Using a pre-configured proxy agent (recommended for custom setups):
+```typescript
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
+const proxyAgent = new HttpsProxyAgent('https://username:password@proxy.example.com:8080');
+const transcript = await YoutubeTranscript.fetchTranscript('VIDEO_ID', {
+  proxyAgent: proxyAgent
+});
+```
+
+2. Using the proxy configuration object:
+```typescript
+const transcript = await YoutubeTranscript.fetchTranscript('VIDEO_ID', {
+  proxy: {
+    host: 'http://proxy.example.com:8080',
+    auth: {  // Optional
+      username: 'your-username',
+      password: 'your-password'
+    }
+  }
+});
+```
+
+The `proxyAgent` option takes precedence over the `proxy` configuration if both are provided. Both methods will apply the proxy to all HTTP requests made by the library.
