@@ -1,6 +1,6 @@
 {
   "name": "t-youtube-transcript-fetcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An enhanced TypeScript library for fetching YouTube transcripts with proxy support (based on youtube-transcript)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

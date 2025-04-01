@@ -1,4 +1,4 @@
-# YouTube Transcript Fetcher
+# t-youtube-transcript-fetcher
 
 A TypeScript library for fetching transcripts from YouTube videos.
 
@@ -16,13 +16,13 @@ This is an enhanced version of [youtube-transcript](https://github.com/Kakulukia
 ## Installation
 
 ```bash
-npm install youtube-transcript-fetcher
+npm install t-youtube-transcript-fetcher
 ```
 
 ## Usage
 
 ```typescript
-import { YoutubeTranscript } from 'youtube-transcript-fetcher';
+import { YoutubeTranscript } from 't-youtube-transcript-fetcher';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Basic usage: Fetch transcript with default language
