@@ -41,7 +41,6 @@ yarn-error.log*
 .env.*.local
 
 # Testing
-coverage/
 .nyc_output/
 
 # TypeScript

@@ -11,6 +11,18 @@ const config = {
       useESM: true,
     }],
   },
+  reporters: [
+    'default',
+    ['jest-html-reporter', {
+      pageTitle: 'Youtube Transcript Fetcher Test Report',
+      outputPath: './coverage/test-report.html',
+      includeFailureMsg: true,
+      includeConsoleLog: true
+    }]
+  ],
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  coverageReporters: ['html', 'text', 'text-summary'],
 };
 
 export default config;

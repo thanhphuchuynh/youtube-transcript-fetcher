@@ -104,6 +104,28 @@ The library throws specific errors for different cases:
 - `NoTranscriptError`: No transcripts available
 - `LanguageNotFoundError`: Requested language not available
 
+## Testing
+
+This project uses Jest for testing. The test suite includes:
+
+- Unit tests for core functionality
+- Error message formatting tests
+- Proxy configuration tests
+
+To run tests:
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+Test reports and coverage information are generated in the `coverage` directory:
+- Test Report: `coverage/test-report.html`
+- Coverage Report: `coverage/index.html`
+
 ## Project Structure
 
 ```
