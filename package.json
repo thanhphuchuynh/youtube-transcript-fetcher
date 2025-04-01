@@ -1,7 +1,7 @@
 {
   "name": "youtube-transcript-fetcher",
   "version": "1.0.0",
-  "description": "A TypeScript library for fetching transcripts from YouTube videos with proxy support",
+  "description": "An enhanced TypeScript library for fetching YouTube transcripts with proxy support (based on youtube-transcript)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -43,5 +43,8 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "acknowledgments": {
+    "youtube-transcript": "https://github.com/Kakulukian/youtube-transcript"
   }
 }

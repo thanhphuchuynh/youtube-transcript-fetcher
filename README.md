@@ -2,6 +2,8 @@
 
 A TypeScript library for fetching transcripts from YouTube videos.
 
+This is an enhanced version of [youtube-transcript](https://github.com/Kakulukian/youtube-transcript) with added proxy support and improved TypeScript integration.
+
 ## Features
 
 - Fetch transcripts from YouTube videos using URL or video ID
@@ -14,33 +16,13 @@ A TypeScript library for fetching transcripts from YouTube videos.
 ## Installation
 
 ```bash
-# Install dependencies
-npm install
-
-# Build the project
-npm run build
+npm install youtube-transcript-fetcher
 ```
-
-## Running the Example
-
-```bash
-# Run the example script
-npm run example
-```
-
-This will run the example in examples/fetch-transcript.ts which demonstrates:
-1. Fetching a transcript in the default language
-2. Fetching a transcript in Spanish
-3. Error handling with an invalid video ID
-4. Using proxy configuration
-
-For your own use case, you would need to copy the src/ directory into your project
-and install the required dependencies.
 
 ## Usage
 
 ```typescript
-import { YoutubeTranscript } from './src';
+import { YoutubeTranscript } from 'youtube-transcript-fetcher';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Basic usage: Fetch transcript with default language
@@ -183,3 +165,16 @@ const transcript = await YoutubeTranscript.fetchTranscript('VIDEO_ID', {
 ```
 
 The `proxyAgent` option takes precedence over the `proxy` configuration if both are provided. Both methods will apply the proxy to all HTTP requests made by the library.
+
+## Credits
+
+This project is an enhanced version of [youtube-transcript](https://github.com/Kakulukian/youtube-transcript) by [Kakulukian](https://github.com/Kakulukian), with added features including:
+
+- Proxy support with flexible configuration
+- Enhanced TypeScript support
+- Improved error handling
+- More detailed documentation
+
+## License
+
+MIT
