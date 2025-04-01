@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "lib": ["ES2020", "DOM", "ES2015", "ES2015.Promise", "ES2015.Core", "ES2015.Collection"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*", "examples/**/*"],
+  "exclude": ["node_modules"]
+}

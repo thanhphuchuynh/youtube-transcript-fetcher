@@ -1,0 +1,14 @@
+{
+  "name": "youtube-transcript-fetcher",
+  "version": "1.0.0",
+  "description": "A TypeScript library for fetching transcripts from YouTube videos",
+  "scripts": {
+    "build": "tsc",
+    "example": "ts-node examples/fetch-transcript.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  }
+}
