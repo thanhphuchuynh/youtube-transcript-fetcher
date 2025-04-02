@@ -15,7 +15,8 @@
     "prepublishOnly": "npm run build",
     "example": "npm run build && npm run build:examples && node dist-examples/examples/fetch-transcript.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "publish:all": "npm publish && npm publish --registry https://registry.npmjs.org/"
   },
   "keywords": [
     "youtube",
@@ -40,7 +41,7 @@
     "node-fetch": "^3.3.2"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
